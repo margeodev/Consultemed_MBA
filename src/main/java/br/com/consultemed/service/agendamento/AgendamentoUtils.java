@@ -12,6 +12,7 @@ import br.com.consultemed.model.Agendamento;
 import br.com.consultemed.model.Medico;
 import br.com.consultemed.model.Paciente;
 import br.com.consultemed.service.GeneralUtils;
+import br.com.consultemed.service.medico.MedicoService;
 import br.com.consultemed.service.medico.MedicoUtils;
 import br.com.consultemed.service.paciente.PacienteUtils;
 
@@ -88,23 +89,45 @@ public class AgendamentoUtils {
 		AgendamentoService service = new AgendamentoService();
 		List<Agendamento> agendamentosPorData = service.listarPorIntervaloDeDatas(dataInicial, dataFinal);
 
-		AgendamentoSuporte.listarAgendamentos(agendamentosPorData);
+		if(agendamentosPorData.size() > 0) {
+			AgendamentoSuporte.listarAgendamentos(agendamentosPorData);			
+		} else {
+			System.out.println("\nNão foram localizados agendamentos neste período.\n");
+		}
 		
 	}	
 	
 	public static void listarTodos() {		
 		AgendamentoService service = new AgendamentoService();
 		List<Agendamento> agendamentos = service.listarTodos();
-		
-		AgendamentoSuporte.listarAgendamentos(agendamentos);
+		if(agendamentos.size() > 0) {
+			AgendamentoSuporte.listarAgendamentos(agendamentos);			
+		} else {
+			System.out.println("\nNão existem agendamentos cadastradas no sistema.\n");
+		}
 		
 	}	
 	
-	public static void listarAgendamentosPorMedico() {	
-		AgendamentoService service = new AgendamentoService();
-		List<Agendamento> agendamentos = service.listarPorMedico("2222");
+	public static void listarAgendamentosPorMedico() throws IOException {			
+		System.out.println("Informe o CRM do Médico: ");
+		String crm = GeneralUtils.lerLinha();
+		MedicoService medicoService = new MedicoService();
+		Medico medico = medicoService.buscarMedicoPorCrm(crm);
 		
-		AgendamentoSuporte.listarAgendamentos(agendamentos);
+		if(medico != null) {
+			AgendamentoService service = new AgendamentoService();
+			List<Agendamento> agendamentos = service.listarPorMedico(crm);
+			if(agendamentos.size() > 0) {
+				AgendamentoSuporte.listarAgendamentos(agendamentos);				
+			} else {
+				System.out.println("\nNão existem agendamentos para o médico informado\n");
+				AgendamentoSuporte.exibeMenuParaVoltar();
+			}
+		} else {
+			System.out.println("\nNão foi encontrado nenhum médico com o CRM informado.\n");
+			listarAgendamentosPorMedico();
+		}
+		
 	}	
 	
 	public static void reagendarConsulta() {	
@@ -131,8 +154,6 @@ public class AgendamentoUtils {
 				cancelarAgendamento();
 			}
 		}		
-		
-		
 	}	
-
+	
 }

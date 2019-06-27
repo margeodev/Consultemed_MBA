@@ -245,8 +245,5 @@ public class AgendamentoSuporte {
 		return valor.matches("[1-7]");
 	}
 	
-	private static void listarAgendamentoPorMedico() throws IOException {
-		System.out.println("Informe o CRM do Médico: ");
-		String crm = GeneralUtils.lerLinha();
-	}
+	
 }

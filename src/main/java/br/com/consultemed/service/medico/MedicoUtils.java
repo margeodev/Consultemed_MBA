@@ -49,8 +49,10 @@ public class MedicoUtils {
 		medico.setDiasAtendimento(diasDeAtendimento);		
 		medico.setNome(nome);
 		medico.setCrm(crm);
+		
 		MedicoService service = new MedicoService();
 		service.salvar(medico);
+		
 		System.out.println("\n\n=====================================");
 		System.out.println("Medico adicionado com sucesso!");
 		System.out.println("=====================================\n\n");

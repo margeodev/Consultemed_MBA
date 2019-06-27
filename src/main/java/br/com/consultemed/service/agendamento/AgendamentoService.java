@@ -41,8 +41,8 @@ public class AgendamentoService implements IAgendamento {
 	}
 
 	@Override
-	public void editar(Agendamento agendamento) {
-		// TODO Auto-generated method stub		
+	public void atualizar(Agendamento agendamento) {
+		this.dao.atualizar(agendamento);	
 	}
 
 	@Override

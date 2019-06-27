@@ -70,17 +70,16 @@ public class PacienteUtils {
 		
 		System.out.println("\n-------------------------------------------");
 		System.out.println("Você deve cadastrar pelo menos 1 contato.\n");
+		contatos.clear();
 		adicionarContato();
 		paciente.setContatos(contatos);
 		
 		PacienteService service = new PacienteService();
-		service.salvar(paciente);
+		service.salvar(paciente);		
 		
-		
-		
-		System.out.println("\n\n=====================================");
+		System.out.println("\n=====================================");
 		System.out.println("| Paciente adicionado com sucesso!  |");
-		System.out.println("=====================================");
+		System.out.println("=====================================\n");
 		
 	}
 	
@@ -88,7 +87,7 @@ public class PacienteUtils {
 	    return s.matches("[0-9]*");
 	}
 	
-	private static void adicionarContato() throws IOException {
+	private static void adicionarContato() throws IOException {		
 		String nome = "";
 		String email = "";
 		String telefone = "";

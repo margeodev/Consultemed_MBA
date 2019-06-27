@@ -4,13 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -54,8 +51,6 @@ public class Paciente implements Serializable {
 		this.telefone = telefone;
 	}
 	
-	@ElementCollection(targetClass = Contato.class)
-	@CollectionTable(name = "paciente_contato", joinColumns = @JoinColumn(name = "paciente_id"))
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Contato> getContatos() {
 		return contatos;

@@ -139,7 +139,35 @@ public class AgendamentoUtils {
 		
 	}	
 	
-	public static void reagendarConsulta() {	
+	public static void reagendarConsulta() throws IOException {	
+		System.out.println("Informe o código do agendamento que você quer reagendar: ");
+		String codigo = GeneralUtils.lerLinha();
+		
+		if(!StringUtils.isNumeric(codigo)) {
+			System.out.println("O código do agendamento deve ser numérico.\n");
+			reagendarConsulta();					
+			
+		} else {
+			Long id = Long.parseLong(codigo);
+			AgendamentoService service = new AgendamentoService();
+			Agendamento agendamento = service.buscarAgendamentoPorId(id);
+			if(agendamento != null) {
+				AgendamentoSuporte.exibirDiasDeAtendimentoDisponiveis(agendamento.getMedico());
+				
+				LocalDate dataAtendimento = AgendamentoSuporte.definirDiaAtendimento();
+				LocalDateTime horaAtendimento = AgendamentoSuporte.defineHoraAtendimento(dataAtendimento);
+				
+				agendamento.setData(dataAtendimento);
+				agendamento.setHora(horaAtendimento);
+				
+				service.atualizar(agendamento);	
+				
+				AgendamentoSuporte.exibeMensagemDeSucesoNaAtualizacaoAgendamento();
+			} else {
+				System.out.println("\nNão foi encontrado nenhum agendamento com o código informado.\n");
+				cancelarAgendamento();
+			}
+		}		
 		
 	}	
 	

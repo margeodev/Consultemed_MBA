@@ -82,5 +82,12 @@ public class AgendamentoDAO {
 		manager.close();
 		return agendamentos;
 	}
+	
+	public void atualizar(Agendamento agendamento) {        
+        this.manager.getTransaction().begin();
+		this.manager.merge(agendamento);
+		this.manager.getTransaction().commit();
+		this.manager.close();
+	}
 
 }

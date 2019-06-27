@@ -154,6 +154,12 @@ public class AgendamentoSuporte {
 		System.out.println("| Agendamento adicionado com sucesso!  |");
 		System.out.println("========================================\n");
 	}
+	
+	protected static void exibeMensagemDeSucesoNaAtualizacaoAgendamento() {
+		System.out.println("\n========================================");
+		System.out.println("| Agendamento atualizado com sucesso!  |");
+		System.out.println("========================================\n");
+	}
 
 	protected static boolean validaFormatoDeData(String data) {
 		String padrao = "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)";
@@ -161,13 +167,13 @@ public class AgendamentoSuporte {
 	}
 
 	protected static void listarAgendamentos(List<Agendamento> agendamentos) {
-		System.out.println("\n=====================================================");
-		System.out.println("| CÓDIGO |  Paciente           | Data da consulta   |");
-		System.out.println("| ------------------------------------------------- |");
+		System.out.println("\n====================================================++===================");
+		System.out.println("| CÓDIGO |  Paciente           | Data da consulta   | Hora da consulta  |");
+		System.out.println("| --------------------------------------------------|-------------------|");
 		for (Agendamento a : agendamentos) {
 			System.out
-					.println("|   " + a.getId() + "    |  " + a.getPaciente().getNome() + "        |  " + a.getData());
-			System.out.println("| ------------------------------------------------- |");
+					.println("|   " + a.getId() + "    | " + a.getPaciente().getNome() + "     | " + a.getData() + "          | " + a.getHora());
+			System.out.println("====================================================++===================\n");
 		}
 	}
 
@@ -212,6 +218,7 @@ public class AgendamentoSuporte {
 				
 			case 5:
 				AgendamentoUtils.reagendarConsulta();
+				exibeMenuParaVoltar();
 				break;
 				
 			case 6:

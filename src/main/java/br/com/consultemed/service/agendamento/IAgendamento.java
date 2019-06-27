@@ -13,7 +13,7 @@ public interface IAgendamento {
 	public List<Agendamento> listarPorMedico(String crm);
 	public List<Agendamento> listarTodos();
 	public void excluir(Long id);
-	public void editar(Agendamento agendamento);
+	public void atualizar(Agendamento agendamento);
 	public Agendamento buscarAgendamentoPorId(Long id);
 	public List<Agendamento> buscarPorDataHora(LocalDate data, LocalDateTime hora);
 	

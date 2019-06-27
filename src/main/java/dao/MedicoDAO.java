@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
-import br.com.consultemed.model.Agendamento;
 import br.com.consultemed.model.Medico;
 import br.com.consultemed.utils.JPAUtils;
 
@@ -23,7 +22,6 @@ public class MedicoDAO {
 	
 	
 	public Medico buscaPorCrm(String crm) {
-		this.manager.getTransaction().begin();
 		Query query = 
 				this.manager.createQuery("SELECT m FROM Medico m WHERE m.crm = :crm");
 		query.setParameter("crm", crm);

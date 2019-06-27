@@ -52,21 +52,30 @@ public class AgendamentoUtils {
 
 		LocalDateTime horaAtendimento = AgendamentoSuporte.defineHoraAtendimento(dataAtendimento);				
 
-		Agendamento agendamento = new Agendamento();
+		Agendamento agendamento = new Agendamento();		
+	
+		AgendamentoService service = new AgendamentoService();
+		List<Agendamento> agend = service.buscarPorDataHora(dataAtendimento, horaAtendimento);
+		
+		while (agend.size() > 0) {
+			System.out.println("\n------------------------------------------------------------");
+			System.out.println("JÁ EXISTE UMA CONSULTA AGENDADA PARA ESTE HORÁRIO NESTA DATA.");
+			System.out.println("------------------------------------------------------------\n");
+			horaAtendimento = AgendamentoSuporte.defineHoraAtendimento(dataAtendimento);
+			agend = service.buscarPorDataHora(dataAtendimento, horaAtendimento);
+		}
 		
 		agendamento.setPaciente(paciente);
 		agendamento.setMedico(medico);
 		agendamento.setData(dataAtendimento);
 		agendamento.setHora(horaAtendimento);
 		agendamento.setAtivo(true);
-	
-		AgendamentoService service = new AgendamentoService();
+		
 		service.salvar(agendamento);	
-		
 		AgendamentoSuporte.exibeMensagemDeSucesoNoAgendamento();		
-		
-	}
 
+	}
+	
 	public static void listarAgendamentosPorPeriodo() throws IOException {
 		System.out.println("Informe a data inicial: ('dd-MM-yyyy')");
 		String data1 = GeneralUtils.lerLinha();		

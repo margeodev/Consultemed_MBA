@@ -1,6 +1,7 @@
 package dao;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -33,6 +34,16 @@ public class AgendamentoDAO {
 				.setParameter("dataInicial", dataInicial).setParameter("dataFinal", dataFinal).getResultList();
 		manager.close();
 		return agendamentosPorData;
+	}
+	
+	public List<Agendamento> buscarPorDataHora(LocalDate data, LocalDateTime hora) {
+		manager = emf.createEntityManager();
+		List<Agendamento> agendamentosPorDataHora = manager
+				.createQuery("FROM Agendamento a WHERE a.data = :data and a.hora = :hora", Agendamento.class)
+				.setParameter("data", data).
+				setParameter("hora", hora).
+				getResultList();		
+		return agendamentosPorDataHora;
 	}
 
 	public List<Agendamento> listarPorMedico(String crm) {

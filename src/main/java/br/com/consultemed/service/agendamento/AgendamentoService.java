@@ -1,6 +1,7 @@
 package br.com.consultemed.service.agendamento;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import br.com.consultemed.model.Agendamento;
@@ -47,6 +48,11 @@ public class AgendamentoService implements IAgendamento {
 	@Override
 	public Agendamento buscarAgendamentoPorId(Long id) {
 		return this.dao.getById(id);
+	}
+
+	@Override
+	public List<Agendamento> buscarPorDataHora(LocalDate data, LocalDateTime hora) {
+		return this.dao.buscarPorDataHora(data, hora);
 	}
 	
 

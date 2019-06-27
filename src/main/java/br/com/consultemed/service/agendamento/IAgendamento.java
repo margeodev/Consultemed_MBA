@@ -1,6 +1,7 @@
 package br.com.consultemed.service.agendamento;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import br.com.consultemed.model.Agendamento;
@@ -14,5 +15,6 @@ public interface IAgendamento {
 	public void excluir(Long id);
 	public void editar(Agendamento agendamento);
 	public Agendamento buscarAgendamentoPorId(Long id);
+	public List<Agendamento> buscarPorDataHora(LocalDate data, LocalDateTime hora);
 	
 }

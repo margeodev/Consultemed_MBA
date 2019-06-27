@@ -177,6 +177,17 @@ public class AgendamentoSuporte {
 		}
 	}
 
+	protected static void listarAgendamentosCancelados(List<Agendamento> agendamentos) {
+		System.out.println("\n==============================================================================");
+		System.out.println("| CÓDIGO |  Paciente           | Data da consulta   | Motivo do cancelamento  |");
+		System.out.println("| --------------------------------------------------|-------------------------|");
+		for (Agendamento a : agendamentos) {
+			System.out
+			.println("|   " + a.getId() + "    | " + a.getPaciente().getNome() + "     | " + a.getData() + "          | " + a.getMotivoCancelamento());
+			System.out.println("------------------------------------------------------------------------------");
+		}
+	}
+
 	protected static void exibeMenuAgendamentos() {
 		System.out.println("\nOPÇÕES DE AGENDAMENTO");
 		System.out.println("-----------------------\n");
@@ -186,7 +197,8 @@ public class AgendamentoSuporte {
 		System.out.println("[4] LISTAR AGENDAMENTOS POR MÉDICO");
 		System.out.println("[5] REAGENDAR CONSULTA");
 		System.out.println("[6] CANCELAR AGENDAMENTO DE CONSULTA");
-		System.out.println("[7] VOLTAR AO MENU PRINCIPAL\n");
+		System.out.println("[7] LISTAR AGENDAMENTOS CANCELADOS");
+		System.out.println("[8] VOLTAR AO MENU PRINCIPAL\n");
 	}
 
 	protected static void selecionarOpcaoAgendamento() throws IOException {
@@ -227,6 +239,11 @@ public class AgendamentoSuporte {
 				break;
 				
 			case 7:
+				AgendamentoUtils.exibeAgendamentosCancelados();
+				exibeMenuParaVoltar();
+				break;
+				
+			case 8:
 				MainUtils.iniciaSecretaria();
 				break;
 				
@@ -249,7 +266,7 @@ public class AgendamentoSuporte {
 	}
 
 	private static boolean isOpcaoAgendamentoValida(String valor) {
-		return valor.matches("[1-7]");
+		return valor.matches("[1-8]");
 	}
 	
 	

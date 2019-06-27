@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ public class Agendamento implements Serializable{
 	private LocalDate data;
 	private LocalDateTime hora;
 	private boolean ativo;
+	private String motivoCancelamento;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,6 +68,14 @@ public class Agendamento implements Serializable{
 	}
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+	
+	@Column(name = "motivo_cancelamento")
+	public String getMotivoCancelamento() {
+		return motivoCancelamento;
+	}
+	public void setMotivoCancelamento(String motivoCancelamento) {
+		this.motivoCancelamento = motivoCancelamento;
 	}
 	
 	@Override

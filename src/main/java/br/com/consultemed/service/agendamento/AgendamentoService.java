@@ -44,6 +44,11 @@ public class AgendamentoService implements IAgendamento {
 	public void atualizar(Agendamento agendamento) {
 		this.dao.atualizar(agendamento);	
 	}
+	
+	@Override
+	public void desativar(Agendamento agendamento) {
+		this.dao.atualizar(agendamento);		
+	}
 
 	@Override
 	public Agendamento buscarAgendamentoPorId(Long id) {
@@ -54,6 +59,10 @@ public class AgendamentoService implements IAgendamento {
 	public List<Agendamento> buscarPorDataHora(LocalDate data, LocalDateTime hora) {
 		return this.dao.buscarPorDataHora(data, hora);
 	}
-	
+
+	@Override
+	public List<Agendamento> exibeAgendamentosCancelados() {
+		return this.dao.exibeAgendamentosCancelados();
+	}
 
 }

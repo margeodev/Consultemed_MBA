@@ -116,6 +116,17 @@ public class AgendamentoUtils {
 		}
 		
 	}	
+
+	public static void exibeAgendamentosCancelados() {		
+		AgendamentoService service = new AgendamentoService();
+		List<Agendamento> agendamentos = service.exibeAgendamentosCancelados();
+		if(agendamentos.size() > 0) {
+			AgendamentoSuporte.listarAgendamentosCancelados(agendamentos);			
+		} else {
+			System.out.println("\nNenhum agendamento foi cancelado.\n");
+		}
+		
+	}	
 	
 	public static void listarAgendamentosPorMedico() throws IOException {			
 		System.out.println("Informe o CRM do Médico: ");
@@ -159,6 +170,7 @@ public class AgendamentoUtils {
 				
 				agendamento.setData(dataAtendimento);
 				agendamento.setHora(horaAtendimento);
+				agendamento.setAtivo(true);
 				
 				service.atualizar(agendamento);	
 				
@@ -171,12 +183,34 @@ public class AgendamentoUtils {
 		
 	}	
 	
+//	public static void cancelarAgendamento() throws IOException {
+//		System.out.println("Informe o código do agendamento que você quer cancelar: ");
+//		String codigo = GeneralUtils.lerLinha();
+//		
+//		if(!StringUtils.isNumeric(codigo)) {
+//			System.out.println("O código do agendamento deve ser numérico.\n");
+//			cancelarAgendamento();					
+//			
+//		} else {
+//			Long id = Long.parseLong(codigo);
+//			AgendamentoService service = new AgendamentoService();
+//			Agendamento agendamento = service.buscarAgendamentoPorId(id);
+//			if(agendamento != null) {
+//				service.excluir(id);
+//				System.out.println("Agendamento cancelado.");
+//			} else {
+//				System.out.println("\nNão foi encontrado nenhum agendamento com o código informado.\n");
+//				cancelarAgendamento();
+//			}
+//		}		
+//	}
+	
 	public static void cancelarAgendamento() throws IOException {
-		System.out.println("Informe o código do agendamento que você quer cancelar: ");
+		System.out.println("\nInforme o código do agendamento que você quer cancelar: \n");
 		String codigo = GeneralUtils.lerLinha();
 		
 		if(!StringUtils.isNumeric(codigo)) {
-			System.out.println("O código do agendamento deve ser numérico.\n");
+			System.out.println("\nO código do agendamento deve ser numérico.\n");
 			cancelarAgendamento();					
 			
 		} else {
@@ -184,8 +218,12 @@ public class AgendamentoUtils {
 			AgendamentoService service = new AgendamentoService();
 			Agendamento agendamento = service.buscarAgendamentoPorId(id);
 			if(agendamento != null) {
-				service.excluir(id);
-				System.out.println("Agendamento cancelado.");
+				agendamento.setAtivo(false);
+				System.out.println("\nInforme o motivo do cancelamento: \n");
+				String descricaoMotivo = GeneralUtils.lerLinha();
+				agendamento.setMotivoCancelamento(descricaoMotivo);
+				service.desativar(agendamento);
+				System.out.println("\nAgendamento cancelado.\n");
 			} else {
 				System.out.println("\nNão foi encontrado nenhum agendamento com o código informado.\n");
 				cancelarAgendamento();

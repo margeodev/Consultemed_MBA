@@ -30,7 +30,7 @@ public class AgendamentoDAO {
 	public List<Agendamento> listarPorIntervaloDeDatas(LocalDate dataInicial, LocalDate dataFinal) {
 		manager = emf.createEntityManager();
 		List<Agendamento> agendamentosPorData = manager
-				.createQuery("from Agendamento a where a.data between :dataInicial and :dataFinal", Agendamento.class)
+				.createQuery("from Agendamento a where a.ativo = true and a.data between :dataInicial and :dataFinal", Agendamento.class)
 				.setParameter("dataInicial", dataInicial).setParameter("dataFinal", dataFinal).getResultList();
 		manager.close();
 		return agendamentosPorData;
@@ -39,7 +39,7 @@ public class AgendamentoDAO {
 	public List<Agendamento> buscarPorDataHora(LocalDate data, LocalDateTime hora) {
 		manager = emf.createEntityManager();
 		List<Agendamento> agendamentosPorDataHora = manager
-				.createQuery("FROM Agendamento a WHERE a.data = :data and a.hora = :hora", Agendamento.class)
+				.createQuery("FROM Agendamento a WHERE a.ativo = true and a.data = :data and a.hora = :hora", Agendamento.class)
 				.setParameter("data", data).
 				setParameter("hora", hora).
 				getResultList();		
@@ -49,7 +49,7 @@ public class AgendamentoDAO {
 	public List<Agendamento> listarPorMedico(String crm) {
 		manager = emf.createEntityManager();
 		List<Agendamento> agendamentosPorData = manager
-				.createQuery("from Agendamento a where a.medico.crm = :crm", Agendamento.class).setParameter("crm", crm)
+				.createQuery("from Agendamento a where a.ativo = true and a.medico.crm = :crm", Agendamento.class).setParameter("crm", crm)
 				.getResultList();
 		manager.close();
 		return agendamentosPorData;
@@ -78,13 +78,27 @@ public class AgendamentoDAO {
 
 	public List<Agendamento> listarTodos() {
 		manager = emf.createEntityManager();
-		List<Agendamento> agendamentos = manager.createQuery("from Agendamento", Agendamento.class).getResultList();
+		List<Agendamento> agendamentos = manager.createQuery("from Agendamento a where a.ativo = true", Agendamento.class).getResultList();
+		manager.close();
+		return agendamentos;
+	}
+	
+	public List<Agendamento> exibeAgendamentosCancelados() {
+		manager = emf.createEntityManager();
+		List<Agendamento> agendamentos = manager.createQuery("from Agendamento a where a.ativo = false", Agendamento.class).getResultList();
 		manager.close();
 		return agendamentos;
 	}
 	
 	public void atualizar(Agendamento agendamento) {        
         this.manager.getTransaction().begin();
+		this.manager.merge(agendamento);
+		this.manager.getTransaction().commit();
+		this.manager.close();
+	}
+
+	public void desativar(Agendamento agendamento) {        
+		this.manager.getTransaction().begin();
 		this.manager.merge(agendamento);
 		this.manager.getTransaction().commit();
 		this.manager.close();

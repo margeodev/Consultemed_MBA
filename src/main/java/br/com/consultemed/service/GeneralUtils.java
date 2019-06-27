@@ -14,8 +14,19 @@ public class GeneralUtils {
 		System.out.println("[2] BUSCAR PACIENTE");
 		System.out.println("[3] CADASTRAR MÉDICO");
 		System.out.println("[4] BUSCAR MÉDICO");
-		System.out.println("[5] AGENDAMENTOS");		
-		System.out.println("[6] CONSULTAS");
+		System.out.println("[5] AGENDAMENTOS");	
+		System.out.println("[6] VOLTAR AO MENU DE USUÁRIO");
+		System.out.println();
+	}
+
+	public static void exibeMenuMedico() {
+		
+		System.out.println("\nSELECIONE A OPÇÃO DESEJADA:\n");
+		System.out.println("[1] LISTAR CONSULTAS");
+		System.out.println("[2] CONSULTAR PACIENTE");
+		System.out.println("[3] AGENDAR CONSULTA");		
+		System.out.println("[4] CANCELAR CONSULTA");
+		System.out.println("[5] VOLTAR AO MENU DE USUÁRIO");
 		System.out.println();
 	}
 	
@@ -27,7 +38,7 @@ public class GeneralUtils {
 		System.out.println("INFORME O TIPO DE USUÁRIO: ");
 		System.out.println("---------------------------");
 		System.out.println("[1] Secretária");
-		System.out.println("[2] Médico");
+		System.out.println("[2] Médico\n");
 	}
 			
 	public static String lerLinha() throws IOException {

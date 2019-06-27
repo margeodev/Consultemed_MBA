@@ -36,7 +36,7 @@ public class PacienteUtils {
 	}
 	
 	public static Paciente buscarPaciente() throws IOException {
-		System.out.println("Informe o código do paciente: ");	
+		System.out.println("\nInforme o código do paciente: \n");	
 		String digitado = GeneralUtils.lerLinha();
 		Long id = 0L;
 		
@@ -54,13 +54,13 @@ public class PacienteUtils {
 	}
 	
 	public static void cadastrarPaciente() throws IOException {
-		System.out.println("Informe o nome do paciente:");
+		System.out.println("\nInforme o nome do paciente:\n");
 		String nome = GeneralUtils.lerLinha();
 		
-		System.out.println("Informe o cpf do paciente:");
+		System.out.println("\nInforme o cpf do paciente:\n");
 		String cpf = GeneralUtils.lerLinha();
 		
-		System.out.println("Informe o telefone do paciente:");
+		System.out.println("\nInforme o telefone do paciente:\n");
 		String telefone = GeneralUtils.lerLinha();
 		
 		Paciente paciente = new Paciente();
@@ -92,13 +92,13 @@ public class PacienteUtils {
 		String email = "";
 		String telefone = "";
 		
-		System.out.println("Informe o nome do contato:");
+		System.out.println("\nInforme o nome do contato:\n");
 		nome = GeneralUtils.lerLinha();
 		
-		System.out.println("Informe o email do contato:");
+		System.out.println("\nInforme o email do contato:\n");
 		email = GeneralUtils.lerLinha();
 		
-		System.out.println("Informe o telefone do contato:");
+		System.out.println("\nInforme o telefone do contato:\n");
 		telefone = GeneralUtils.lerLinha();
 		
 		Contato contato = new Contato();
@@ -112,7 +112,7 @@ public class PacienteUtils {
 	} 
 	
 	private static void cadastrarOutroContato() throws IOException {
-		System.out.println("Deseja cadastrar outro contato? S/N");
+		System.out.println("\nDeseja cadastrar outro contato? S/N\n");
 		String resposta = GeneralUtils.lerLinha();	
 		
 		if(resposta.equalsIgnoreCase("s")) {

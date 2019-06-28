@@ -3,7 +3,6 @@ package br.com.consultemed.service.agendamento;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -77,23 +76,9 @@ public class AgendamentoUtils {
 	}
 	
 	public static void listarAgendamentosPorPeriodo() throws IOException {
-		System.out.println("Informe a data inicial: ('dd-MM-yyyy')");
-		String data1 = GeneralUtils.lerLinha();		
-		if(!AgendamentoSuporte.validaFormatoDeData(data1)) {
-			System.out.println("Formato de data inválido.");
-			listarAgendamentosPorPeriodo();
-		} 
-		
-		System.out.println("Informe a data final: ('dd-MM-yyyy')");
-		String data2 = GeneralUtils.lerLinha();		
-		if(!AgendamentoSuporte.validaFormatoDeData(data2)) {
-			System.out.println("Formato de data inválido.\n");
-			listarAgendamentosPorPeriodo();
-		}
-		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-		LocalDate dataInicial = LocalDate.parse(data1,formatter);
-		LocalDate dataFinal = LocalDate.parse(data2,formatter);
+		LocalDate datas[] = GeneralUtils.geraDataInicialEFinal();
+		LocalDate dataInicial = datas[0];
+		LocalDate dataFinal = datas[1];
 		
 		AgendamentoService service = new AgendamentoService();
 		List<Agendamento> agendamentosPorData = service.listarPorIntervaloDeDatas(dataInicial, dataFinal);
@@ -182,29 +167,7 @@ public class AgendamentoUtils {
 		}		
 		
 	}	
-	
-//	public static void cancelarAgendamento() throws IOException {
-//		System.out.println("Informe o código do agendamento que você quer cancelar: ");
-//		String codigo = GeneralUtils.lerLinha();
-//		
-//		if(!StringUtils.isNumeric(codigo)) {
-//			System.out.println("O código do agendamento deve ser numérico.\n");
-//			cancelarAgendamento();					
-//			
-//		} else {
-//			Long id = Long.parseLong(codigo);
-//			AgendamentoService service = new AgendamentoService();
-//			Agendamento agendamento = service.buscarAgendamentoPorId(id);
-//			if(agendamento != null) {
-//				service.excluir(id);
-//				System.out.println("Agendamento cancelado.");
-//			} else {
-//				System.out.println("\nNão foi encontrado nenhum agendamento com o código informado.\n");
-//				cancelarAgendamento();
-//			}
-//		}		
-//	}
-	
+
 	public static void cancelarAgendamento() throws IOException {
 		System.out.println("\nInforme o código do agendamento que você quer cancelar: \n");
 		String codigo = GeneralUtils.lerLinha();

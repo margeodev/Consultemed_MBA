@@ -24,14 +24,16 @@ public class AgendamentoDAO {
 		this.manager.getTransaction().begin();
 		this.manager.persist(agendamento);
 		this.manager.getTransaction().commit();
-		this.manager.close();
+		this.manager.close();		
 	};
 
 	public List<Agendamento> listarPorIntervaloDeDatas(LocalDate dataInicial, LocalDate dataFinal) {
 		manager = emf.createEntityManager();
 		List<Agendamento> agendamentosPorData = manager
-				.createQuery("from Agendamento a where a.ativo = true and a.data between :dataInicial and :dataFinal", Agendamento.class)
-				.setParameter("dataInicial", dataInicial).setParameter("dataFinal", dataFinal).getResultList();
+				.createQuery("FROM Agendamento a WHERE a.ativo = true AND a.data BETWEEN :dataInicial AND :dataFinal", Agendamento.class)
+				.setParameter("dataInicial", dataInicial)
+				.setParameter("dataFinal", dataFinal)
+				.getResultList();
 		manager.close();
 		return agendamentosPorData;
 	}
@@ -39,17 +41,18 @@ public class AgendamentoDAO {
 	public List<Agendamento> buscarPorDataHora(LocalDate data, LocalDateTime hora) {
 		manager = emf.createEntityManager();
 		List<Agendamento> agendamentosPorDataHora = manager
-				.createQuery("FROM Agendamento a WHERE a.ativo = true and a.data = :data and a.hora = :hora", Agendamento.class)
-				.setParameter("data", data).
-				setParameter("hora", hora).
-				getResultList();		
+				.createQuery("FROM Agendamento a WHERE a.ativo = true AND a.data = :data AND a.hora = :hora", Agendamento.class)
+				.setParameter("data", data)
+				.setParameter("hora", hora)
+				.getResultList();		
 		return agendamentosPorDataHora;
 	}
 
 	public List<Agendamento> listarPorMedico(String crm) {
 		manager = emf.createEntityManager();
 		List<Agendamento> agendamentosPorData = manager
-				.createQuery("from Agendamento a where a.ativo = true and a.medico.crm = :crm", Agendamento.class).setParameter("crm", crm)
+				.createQuery("FROM Agendamento a WHERE a.ativo = true AND a.medico.crm = :crm", Agendamento.class)
+				.setParameter("crm", crm)
 				.getResultList();
 		manager.close();
 		return agendamentosPorData;
@@ -78,14 +81,14 @@ public class AgendamentoDAO {
 
 	public List<Agendamento> listarTodos() {
 		manager = emf.createEntityManager();
-		List<Agendamento> agendamentos = manager.createQuery("from Agendamento a where a.ativo = true", Agendamento.class).getResultList();
+		List<Agendamento> agendamentos = manager.createQuery("FROM Agendamento a WHERE a.ativo = true", Agendamento.class).getResultList();
 		manager.close();
 		return agendamentos;
 	}
 	
 	public List<Agendamento> exibeAgendamentosCancelados() {
 		manager = emf.createEntityManager();
-		List<Agendamento> agendamentos = manager.createQuery("from Agendamento a where a.ativo = false", Agendamento.class).getResultList();
+		List<Agendamento> agendamentos = manager.createQuery("FROM Agendamento a WHERE a.ativo = false", Agendamento.class).getResultList();
 		manager.close();
 		return agendamentos;
 	}

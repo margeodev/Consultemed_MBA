@@ -161,30 +161,32 @@ public class AgendamentoSuporte {
 		System.out.println("========================================\n");
 	}
 
-	protected static boolean validaFormatoDeData(String data) {
-		String padrao = "(0?[1-9]|[12][0-9]|3[01])-(0?[1-9]|1[012])-((19|20)\\d\\d)";
-		return data.matches(padrao);
-	}
-
-	protected static void listarAgendamentos(List<Agendamento> agendamentos) {
-		System.out.println("\n====================================================++===================");
-		System.out.println("| CÓDIGO |  Paciente           | Data da consulta   | Hora da consulta  |");
-		System.out.println("| --------------------------------------------------|-------------------|");
-		for (Agendamento a : agendamentos) {
-			System.out
-					.println("|   " + a.getId() + "    | " + a.getPaciente().getNome() + "     | " + a.getData() + "          | " + a.getHora());
-			System.out.println("====================================================++===================\n");
+	protected static void listarAgendamentos(List<Agendamento> agendamentos) {		
+		DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("hh:mm");
+		DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		System.out.println("=================================");
+		for(Agendamento a: agendamentos) {
+			String hora = a.getHora().format(formatterTime);
+			String data = a.getData().format(formatterDate);
+			System.out.println("CÓDIGO: " + a.getId());
+			System.out.println("PACIENTE: " + a.getPaciente().getNome());
+			System.out.println("DATA: " + data);
+			System.out.println("HORA: " + hora);
+			System.out.println("--------------------------------");
 		}
+		
 	}
 
-	protected static void listarAgendamentosCancelados(List<Agendamento> agendamentos) {
-		System.out.println("\n==============================================================================");
-		System.out.println("| CÓDIGO |  Paciente           | Data da consulta   | Motivo do cancelamento  |");
-		System.out.println("| --------------------------------------------------|-------------------------|");
-		for (Agendamento a : agendamentos) {
-			System.out
-			.println("|   " + a.getId() + "    | " + a.getPaciente().getNome() + "     | " + a.getData() + "          | " + a.getMotivoCancelamento());
-			System.out.println("------------------------------------------------------------------------------");
+	protected static void listarAgendamentosCancelados(List<Agendamento> agendamentos) {		
+		DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		System.out.println("=================================");
+		for(Agendamento a: agendamentos) {
+			String data = a.getData().format(formatterDate);
+			System.out.println("CÓDIGO: " + a.getId());
+			System.out.println("PACIENTE: " + a.getPaciente().getNome());
+			System.out.println("DATA: " + data);
+			System.out.println("MOTIVO: " + a.getMotivoCancelamento());
+			System.out.println("--------------------------------");
 		}
 	}
 
@@ -267,7 +269,5 @@ public class AgendamentoSuporte {
 
 	private static boolean isOpcaoAgendamentoValida(String valor) {
 		return valor.matches("[1-8]");
-	}
-	
-	
+	}	
 }

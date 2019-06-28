@@ -6,6 +6,7 @@ import br.com.consultemed.model.Medico;
 import br.com.consultemed.model.Paciente;
 import br.com.consultemed.service.GeneralUtils;
 import br.com.consultemed.service.agendamento.AgendamentoUtils;
+import br.com.consultemed.service.consulta.ConsultaUtils;
 import br.com.consultemed.service.medico.MedicoUtils;
 import br.com.consultemed.service.paciente.PacienteUtils;
 
@@ -108,17 +109,8 @@ public class MainUtils {
 				exibeMenuParaVoltar(2);
 				break;
 			case 2:
-				Paciente paciente = PacienteUtils.buscarPaciente();
-				if (paciente != null) {
-					PacienteUtils.exibePaciente(paciente);
-					exibeMenuParaVoltar(2);
-					
-				} else {
-					System.out.println("\n\n====================================");
-					System.out.println("| Paciente não localizado.         |");
-					System.out.println("====================================");
-					exibeMenuParaVoltar(2);
-				}
+				ConsultaUtils.cadastrarConsulta();
+				exibeMenuParaVoltar(2);
 				break;
 			case 3:
 				AgendamentoUtils.cadastrarAgendamento();
@@ -129,6 +121,14 @@ public class MainUtils {
 				exibeMenuParaVoltar(2);
 				break;
 			case 5:
+				ConsultaUtils.listarTodasConsultas();
+				exibeMenuParaVoltar(2);
+				break;
+			case 6:
+				ConsultaUtils.listarPorIntervaloDeDatas();
+				exibeMenuParaVoltar(2);
+				break;
+			case 7:
 				iniciaSistema();
 				break;
 			}
@@ -146,7 +146,7 @@ public class MainUtils {
 	}
 
 	private static boolean isOpcaoMedicoValida(String valor) {
-		return valor.matches("[1-5]");
+		return valor.matches("[1-7]");
 	}
 
 	private static boolean isOpcaoUsuarioValida(String valor) {

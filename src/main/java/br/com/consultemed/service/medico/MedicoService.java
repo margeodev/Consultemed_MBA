@@ -21,7 +21,7 @@ public class MedicoService implements IMedico {
 		try {
 			return this.dao.buscaPorCrm(crm);			
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			e.getMessage();
 		}
 		return null;
 	}

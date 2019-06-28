@@ -126,17 +126,22 @@ public class ConsultaUtils {
 		
 		List<Consulta> consultas = service.listarPorIntervaloDeDatas(dataInicial, dataFinal, medico.getCrm());
 		
-		DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("hh:mm");
-		DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		System.out.println("=================================");
-		for(Consulta c: consultas) {
-			String hora = c.getAgendamento().getHora().format(formatterTime);
-			String data = c.getAgendamento().getData().format(formatterDate);
-			System.out.println("Paciente: " + c.getAgendamento().getPaciente().getNome());
-			System.out.println("Descrição: \n" + c.getDescricao());
-			System.out.println("Data: " + data);
-			System.out.println("Hora: " + hora);
-			System.out.println("--------------------------------");
+		if(consultas.size() > 0) {
+			DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("hh:mm");
+			DateTimeFormatter formatterDate = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			System.out.println("=================================");
+			for(Consulta c: consultas) {
+				String hora = c.getAgendamento().getHora().format(formatterTime);
+				String data = c.getAgendamento().getData().format(formatterDate);
+				System.out.println("Paciente: " + c.getAgendamento().getPaciente().getNome());
+				System.out.println("Descrição: \n" + c.getDescricao());
+				System.out.println("Data: " + data);
+				System.out.println("Hora: " + hora);
+				System.out.println("--------------------------------");
+			}
+			
+		} else {
+			System.out.println("Não foram encontradas consultas no período informado.");
 		}
 	}
 	

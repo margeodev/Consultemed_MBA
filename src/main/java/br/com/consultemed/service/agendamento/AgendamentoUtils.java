@@ -34,6 +34,7 @@ public class AgendamentoUtils {
 		
 		PacienteUtils.exibePaciente(paciente);
 
+		
 		Medico medico = new Medico();
 		medico = MedicoUtils.buscarMedico();
 
@@ -46,6 +47,11 @@ public class AgendamentoUtils {
 		MedicoUtils.exibeMedico(medico);		
 
 		AgendamentoSuporte.exibirDiasDeAtendimentoDisponiveis(medico);
+		
+		System.out.println("\n===================================================================================");
+		System.out.println(" VOCÊ PODE AGENDAR A SUA CONSULTA PARA ATÉ 30 DIAS A PARTIR DA DATA ATUAL");
+		System.out.println(" NESSE INTERVALO SERÃO EXIBIDOS APENAS OS DIAS DE ATENDIMENTO DO MÉDICO ESCOLHIDO.");
+		System.out.println("===================================================================================");
 
 		LocalDate dataAtendimento = AgendamentoSuporte.definirDiaAtendimento();
 

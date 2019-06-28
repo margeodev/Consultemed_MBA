@@ -24,12 +24,12 @@ public class GeneralUtils {
 	public static void exibeMenuMedico() {
 		
 		System.out.println("\nSELECIONE A OPÇÃO DESEJADA:\n");
-		System.out.println("[1] LISTAR CONSULTAS");
+		System.out.println("[1] LISTAR CONSULTAS AGENDADAS");
 		System.out.println("[2] CONSULTAR PACIENTE");
-		System.out.println("[3] AGENDAR CONSULTA");		
+		System.out.println("[3] AGENDAR NOVA CONSULTA");		
 		System.out.println("[4] CANCELAR CONSULTA");
-		System.out.println("[5] LISTAR TODAS AS CONSULTAS");
-		System.out.println("[6] LISTAR CONSULTAS POR PERÍODO ");
+		System.out.println("[5] LISTAR TODAS AS CONSULTAS ATENDIDAS");
+		System.out.println("[6] LISTAR CONSULTAS ATENDIDAS POR PERÍODO ");
 		System.out.println("[7] VOLTAR AO MENU DE USUÁRIO");
 		System.out.println();
 	}

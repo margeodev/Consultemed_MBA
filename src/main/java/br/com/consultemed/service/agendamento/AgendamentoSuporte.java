@@ -109,9 +109,9 @@ public class AgendamentoSuporte {
 	}
 
 	protected static LocalDate definirDiaAtendimento() throws IOException {
-		System.out.println("\n---------------------------------");
-		System.out.println("Informe um dos dias disponíveis.");
-		System.out.println("---------------------------------\n");
+		System.out.println("---------------------------------------------------------------------");
+		System.out.println(" Informe um dos dias disponíveis a partir do número ao lado da data.");
+		System.out.println("---------------------------------------------------------------------\n");
 
 		String dia = GeneralUtils.lerLinha();
 
